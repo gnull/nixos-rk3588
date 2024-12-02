@@ -36,12 +36,10 @@ in
   # allows usage of mainline mesa
   kernelPatches = [{
     name = "hbiyik-panthor.patch";
-    # NOTE: This needs to be `fetchurl` instead of `fetchpatch`, because `fetchpatch`
-    # reorders the patches, and the order matters since they're generated from commits.
-    patch = fetchurl {
-      url = "https://github.com/hbiyik/linux/compare/${panthor-base}...${panthor-head}.patch";
-      hash = "sha256-/5SvlGsgHbn1i68+GASOeNZmxoZiIt280L6iUFz3MFU=";
-    };
+    # Generate using this command:
+    #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/${panthor-base}...${panthor-head}.patch
+    # See the variables above for the values of panthor-base and panthor-head.
+    patch = ./hbiyik-panthor.patch;
     extraConfig = { };
   }];
 
