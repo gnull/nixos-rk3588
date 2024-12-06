@@ -1,4 +1,4 @@
-From df2f1c7cada29f676e700cf3ab60f0444a07eea1 Mon Sep 17 00:00:00 2001
+From cefba016f1fd47f2f72226dcc303ca4f5f1b5f02 Mon Sep 17 00:00:00 2001
 From: Ivan Oleynikov <ivan.oleynikov95@gmail.com>
 Date: Fri, 6 Dec 2024 17:39:31 +0100
 Subject: [PATCH] remove rk3588-hdmirx.dts overlay to prevent hdmirx activation
@@ -6,7 +6,8 @@ Subject: [PATCH] remove rk3588-hdmirx.dts overlay to prevent hdmirx activation
 ---
  arch/arm64/boot/dts/rockchip/overlay/Makefile        |  1 -
  .../boot/dts/rockchip/overlay/rk3588-hdmirx.dts      | 12 ------------
- 2 files changed, 13 deletions(-)
+ .../boot/dts/rockchip/rk3588-orangepi-5-plus.dts     |  4 ++++
+ 3 files changed, 4 insertions(+), 13 deletions(-)
  delete mode 100644 arch/arm64/boot/dts/rockchip/overlay/rk3588-hdmirx.dts
 
 diff --git a/arch/arm64/boot/dts/rockchip/overlay/Makefile b/arch/arm64/boot/dts/rockchip/overlay/Makefile
@@ -39,6 +40,18 @@ index 91b3120d309e..000000000000
 -		};
 -	};
 -};
+diff --git a/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus.dts b/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus.dts
+index cae5279bbcca..9bec59742f3e 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus.dts
+@@ -320,3 +320,7 @@ &spi4 {
+ 	assigned-clock-rates = <200000000>;
+ 	num-cs = <2>;
+ };
++
++&hdmirx_ctrler {
++	status = "disabled";
++};
 -- 
 2.47.1
 
