@@ -34,14 +34,21 @@ in
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
   # allows usage of mainline mesa
-  kernelPatches = [{
-    name = "hbiyik-panthor.patch";
-    # Generate using this command:
-    #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/${panthor-base}...${panthor-head}.patch
-    # See the variables above for the values of panthor-base and panthor-head.
-    patch = ./hbiyik-panthor.patch;
-    extraConfig = { };
-  }];
+  kernelPatches = [
+    {
+      name = "hbiyik-panthor.patch";
+      # Generate using this command:
+      #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/${panthor-base}...${panthor-head}.patch
+      # See the variables above for the values of panthor-base and panthor-head.
+      patch = ./hbiyik-panthor.patch;
+      extraConfig = { };
+    }
+    {
+      name = "remove-rk3588-hdmirx-overlay.patch";
+      patch = ./remove-rk3588-hdmirx-overlay.patch;
+      extraConfig = { };
+    }
+  ];
 
   # Steps to the generated kernel config file
   #  1. git clone --depth 1 https://github.com/hbiyik/linux.git -b rk-6.1-rkr3-panthor
