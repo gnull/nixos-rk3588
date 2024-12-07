@@ -48,7 +48,7 @@ in {
           /plugin/;
 
           / {
-            compatible;
+            compatible = "rockchip,rk3588-orangepi-5-plus";
             fragment@0 {
               target = <&hdmirx_ctrler>;
               __overlay__ {
