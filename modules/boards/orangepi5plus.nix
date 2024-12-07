@@ -48,6 +48,12 @@ in {
           /plugin/;
 
           / {
+            fragment@0 {
+              target = <&hdmirx_ctrler>;
+              __overlay__ {
+                status = "disabled";
+              };
+            };
           };
           '';
         }
