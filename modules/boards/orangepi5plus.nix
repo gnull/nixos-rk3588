@@ -42,7 +42,7 @@ in {
       overlays = [
         {
         name = "hifiberry-dacplus";
-        filter = "rockchip/rk3588-orangepi-5-plus.dtb";
+        # filter = "rockchip/rk3588-orangepi-5-plus.dtb";
         dtsText = ''
           /dts-v1/;
           /plugin/;
