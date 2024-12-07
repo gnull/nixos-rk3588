@@ -49,7 +49,7 @@ in {
 
           / {
             fragment@0 {
-              target = <&hdmirx_ctrler>;
+              target = "/hdmirx-controller@fdee0000";
               __overlay__ {
                 status = "disabled";
               };
