@@ -48,6 +48,7 @@ in {
           /plugin/;
 
           / {
+            compatible = "sup,dawg";
             fragment@0 {
               target = <&hdmirx_ctrler>;
               __overlay__ {
