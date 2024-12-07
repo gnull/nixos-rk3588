@@ -50,7 +50,7 @@ in {
           / {
             compatible = "rockchip,rk3588-orangepi-5-plus";
             fragment@0 {
-              target = <&hdmirx_ctrler>;
+              target = "/hdmirx-controller@fdee0000";
               __overlay__ {
                 status = "disabled";
               };
