@@ -48,12 +48,6 @@ in {
           /plugin/;
 
           / {
-            fragment@0 {
-              target = "/hdmirx-controller@fdee0000";
-              __overlay__ {
-                status = "disabled";
-              };
-            };
           };
           '';
         }
