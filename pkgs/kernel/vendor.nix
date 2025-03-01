@@ -23,10 +23,10 @@ in
 
   # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
   src = fetchFromGitHub {
-    owner = "Joshua-Riek";
+    owner = "gnull";
     repo = "linux-rockchip";
-    rev = "5c43412639fd134f0ba690de2108eaa7ea349e2a";
-    hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
+    rev = "d860faef18c1073d99bf23536d9b8c3994193eeb";
+    hash = "sha256-Bagz1Xc3ugB8EVPa7mv3REETokJlot5cE1k5eKRzkOo=";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
