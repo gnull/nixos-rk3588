@@ -48,13 +48,12 @@ in {
             /plugin/;
 
             / {
-              compatible = "rockchip,rk3588-orangepi-5-plus";
-              fragment@0 {
-                target = <&fan>;
-                __overlay__ {
-                  cooling-levels = <0 0 0 255 255 255>;
-                };
-              };
+            	compatible = "rockchip,rk3588-orangepi-5-plus";
+
+            };
+
+            &fan {
+            	cooling-levels = <0 0 0 255 255 255>;
             };
           '';
         }
