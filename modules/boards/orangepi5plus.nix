@@ -40,6 +40,24 @@ in {
       # https://github.com/armbian/build/blob/f9d7117/config/boards/orangepi5-plus.wip#L10C51-L10C51
       name = "rockchip/rk3588-orangepi-5-plus.dtb";
       overlays = [
+        {
+          name = "hifiberry-dacplus";
+          # filter = "rockchip/rk3588-orangepi-5-plus.dtb";
+          dtsText = ''
+            /dts-v1/;
+            /plugin/;
+
+            / {
+              compatible = "rockchip,rk3588-orangepi-5-plus";
+              fragment@0 {
+                target = <&fan>;
+                __overlay__ {
+                  cooling-levels = <0 0 0 255 255 255>;
+                };
+              };
+            };
+          '';
+        }
       ];
     };
 
