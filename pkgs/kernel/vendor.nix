@@ -14,11 +14,11 @@
 , ...
 }:
 let
-  modDirVersion = "6.1.75";
+  modDirVersion = "6.1.99";
 in
 (linuxManualConfig {
   inherit modDirVersion;
-  version = "${modDirVersion}-jr-noble";
+  version = "${modDirVersion}-armbian";
   extraMeta.branch = "6.1";
 
   # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
