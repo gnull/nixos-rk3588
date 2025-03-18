@@ -14,19 +14,19 @@
 , ...
 }:
 let
-  modDirVersion = "6.1.99";
+  modDirVersion = "6.1.75";
 in
 (linuxManualConfig {
   inherit modDirVersion;
-  version = "${modDirVersion}-armbian";
+  version = "${modDirVersion}-riek";
   extraMeta.branch = "6.1";
 
   # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
   src = fetchFromGitHub {
-    owner = "armbian";
+    owner = "Joshua-Riek";
     repo = "linux-rockchip";
-    rev = "rk-6.1-rkr5";
-    hash = "sha256-TPOUGUjvaKP5SglVomI8y7AKN1QbL735MnQQQxsisVA=";
+    rev = "noble";
+    hash = "sha256-m0tDapnAUYnZPNVaqrGUdGBF2sYCrZclCroJ3X6etkQ=";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
