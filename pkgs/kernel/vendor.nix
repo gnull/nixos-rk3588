@@ -27,7 +27,7 @@ in
     owner = "armbian";
     repo = "linux-rockchip";
     rev = "rk-6.1-rkr5";
-    hash = "sha256-TPOUGUjvaKP5SglVomI8y7AKN1QbL735MnQQQxsisVA=";
+    hash = "sha256-jBFDnCnfapZGAQ90ojbmdDxc3A8KcnhgL4Of+qmzPGo=";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
