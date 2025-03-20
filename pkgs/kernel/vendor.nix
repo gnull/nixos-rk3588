@@ -9,6 +9,7 @@
 #
 { fetchFromGitHub
 , linuxManualConfig
+, buildLinux
 , ubootTools
 , fetchurl
 , ...
@@ -16,7 +17,7 @@
 let
   modDirVersion = "6.1.99";
 in
-(linuxManualConfig rec {
+(buildLinux rec {
   inherit modDirVersion;
   version = "${modDirVersion}-armbian";
   extraMeta.branch = "6.1";
@@ -41,7 +42,7 @@ in
   #  5. Then use `make menuconfig` in kernel's root directory to view and customize the kernel(like enable/disable rknpu, rkflash, ACPI(for UEFI) etc).
   #  6. copy the generated .config to ./pkgs/kernel/rk35xx_vendor_config (also be sure to update the corresponding `.nix` file accordingly) and commit it.
   # 
-  configfile = "${src}/arch/arm64/configs/rockchip_linux_defconfig";
+  # configfile = "${src}/arch/arm64/configs/rockchip_linux_defconfig";
   # config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
