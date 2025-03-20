@@ -44,7 +44,7 @@ in
   # 
   # configfile = "${src}/arch/arm64/configs/rockchip_linux_defconfig";
   configfile = ./rk35xx_vendor_config;
-  # config = import ./rk35xx_vendor_config.nix;
+  config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
