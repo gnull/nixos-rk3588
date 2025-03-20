@@ -17,7 +17,7 @@
 let
   modDirVersion = "6.1.99";
 in
-(buildLinux rec {
+(linuxManualConfig rec {
   inherit modDirVersion;
   version = "${modDirVersion}-armbian";
   extraMeta.branch = "6.1";
