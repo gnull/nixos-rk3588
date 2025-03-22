@@ -9,7 +9,7 @@
 }: let
   extraInstallCommands = ''
     ${pkgs.coreutils}/bin/mkdir -p /boot/dtb/base
-    ${pkgs.coreutils}/bin/cp -r ${config.hardware.deviceTree.package}/dtbs/rockchip/* /boot/dtb/base/
+    ${pkgs.coreutils}/bin/cp -r ${config.hardware.deviceTree.package}/rockchip/* /boot/dtb/base/
     ${pkgs.coreutils}/bin/sync
   '';
 in {
