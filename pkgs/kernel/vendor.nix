@@ -36,13 +36,13 @@ in
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
   # allows usage of mainline mesa
-  kernelPatches = [{
-    name = "hbiyik-panthor.patch";
-    # Generate using this command:
-    #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/aa54fa4e0712616d44f2c2f312ecc35c0827833d...c81ebd8e12b64a42a6efd68cc0ed018b57d14e91.patch
-    patch = ./hbiyik-panthor.patch;
-    extraConfig = { };
-  }];
+  # kernelPatches = [{
+  #   name = "hbiyik-panthor.patch";
+  #   # Generate using this command:
+  #   #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/aa54fa4e0712616d44f2c2f312ecc35c0827833d...c81ebd8e12b64a42a6efd68cc0ed018b57d14e91.patch
+  #   patch = ./hbiyik-panthor.patch;
+  #   extraConfig = { };
+  # }];
 
   # Steps to the generated kernel config file
   #  1. git clone --depth 1 https://github.com/hbiyik/linux.git -b rk-6.1-rkr3-panthor
