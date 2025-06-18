@@ -52,9 +52,9 @@ in
   #  5. Then use `make menuconfig` in kernel's root directory to view and customize the kernel(like enable/disable rknpu, rkflash, ACPI(for UEFI) etc).
   #  6. copy the generated .config to ./pkgs/kernel/rk35xx_vendor_config (also be sure to update the corresponding `.nix` file accordingly) and commit it.
   # 
-  # configfile = ./rk35xx_vendor_config;
+  configfile = ./rk35xx_vendor_config;
   # allowImportFromDerivation = true;
-  config = import ./rk35xx_vendor_config.nix;
+  # config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
