@@ -14,12 +14,12 @@
 , ...
 }:
 let
-  modDirVersion = "6.1.75";
+  modDirVersion = "6.6.87";
 in
 (linuxManualConfig rec {
   inherit modDirVersion;
   version = "${modDirVersion}-armbian";
-  extraMeta.branch = "6.1";
+  extraMeta.branch = "6.6";
 
   # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
   # src = fetchFromGitHub {
@@ -53,9 +53,8 @@ in
   #  6. copy the generated .config to ./pkgs/kernel/rk35xx_vendor_config (also be sure to update the corresponding `.nix` file accordingly) and commit it.
   # 
   configfile = ./rk35xx_vendor_config;
-  ignoreConfigErrors = true;
   # allowImportFromDerivation = true;
-  # config = import ./rk35xx_vendor_config.nix;
+  config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
