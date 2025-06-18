@@ -16,7 +16,7 @@
 let
   modDirVersion = "6.1.75";
 in
-(linuxManualConfig {
+(linuxManualConfig rec {
   inherit modDirVersion;
   version = "${modDirVersion}-jr-noble";
   extraMeta.branch = "6.1";
@@ -25,19 +25,19 @@ in
   src = fetchFromGitHub {
     owner = "Joshua-Riek";
     repo = "linux-rockchip";
-    rev = "5c43412639fd134f0ba690de2108eaa7ea349e2a";
+    branch = "noble";
     hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
   # allows usage of mainline mesa
-  kernelPatches = [{
-    name = "hbiyik-panthor.patch";
-    # Generate using this command:
-    #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/aa54fa4e0712616d44f2c2f312ecc35c0827833d...c81ebd8e12b64a42a6efd68cc0ed018b57d14e91.patch
-    patch = ./hbiyik-panthor.patch;
-    extraConfig = { };
-  }];
+  # kernelPatches = [{
+  #   name = "hbiyik-panthor.patch";
+  #   # Generate using this command:
+  #   #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/aa54fa4e0712616d44f2c2f312ecc35c0827833d...c81ebd8e12b64a42a6efd68cc0ed018b57d14e91.patch
+  #   patch = ./hbiyik-panthor.patch;
+  #   extraConfig = { };
+  # }];
 
   # Steps to the generated kernel config file
   #  1. git clone --depth 1 https://github.com/hbiyik/linux.git -b rk-6.1-rkr3-panthor
@@ -47,8 +47,8 @@ in
   #  5. Then use `make menuconfig` in kernel's root directory to view and customize the kernel(like enable/disable rknpu, rkflash, ACPI(for UEFI) etc).
   #  6. copy the generated .config to ./pkgs/kernel/rk35xx_vendor_config (also be sure to update the corresponding `.nix` file accordingly) and commit it.
   # 
-  configfile = ./rk35xx_vendor_config;
-  config = import ./rk35xx_vendor_config.nix;
+  configfile = "${src}/debian.rockchip/config/config.common.ubuntu";
+  # config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
