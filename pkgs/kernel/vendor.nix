@@ -14,7 +14,7 @@
 , ...
 }:
 let
-  modDirVersion = "6.1";
+  modDirVersion = "6.1.75";
 in
 (linuxManualConfig rec {
   inherit modDirVersion;
