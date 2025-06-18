@@ -48,7 +48,8 @@ in
   #  6. copy the generated .config to ./pkgs/kernel/rk35xx_vendor_config (also be sure to update the corresponding `.nix` file accordingly) and commit it.
   # 
   configfile = ./rk35xx_vendor_config;
-  config = import ./rk35xx_vendor_config.nix;
+  allowImportFromDerivation = true;
+  # config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
