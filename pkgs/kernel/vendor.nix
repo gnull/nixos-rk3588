@@ -22,11 +22,16 @@ in
   extraMeta.branch = "6.1";
 
   # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
-  src = fetchFromGitHub {
-    owner = "armbian";
-    repo = "linux-rockchip";
-    rev = "rk-6.1-rkr5.1";
-    hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
+  # src = fetchFromGitHub {
+  #   owner = "armbian";
+  #   repo = "linux-rockchip";
+  #   rev = "rk-6.1-rkr5.1";
+  #   hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
+  # };
+
+  src = fetchurl {
+    url = "mirror://kernel/linux/kernel/v6.x/linux-6.6.87.tar.xz";
+    sha256 = "1iks6msk4cajyy0khyhrwsdl123hr81n67xzdnhlgg6dvb1famw9";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
