@@ -49,7 +49,7 @@ in
   # 
   # configfile = ./rk35xx_vendor_config;
   # allowImportFromDerivation = true;
-  # config = import ./rk35xx_vendor_config.nix;
+  config = import ./rk35xx_vendor_config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
