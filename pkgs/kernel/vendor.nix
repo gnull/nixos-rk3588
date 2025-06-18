@@ -10,29 +10,27 @@
 { fetchFromGitHub
 , linuxManualConfig
 , ubootTools
+, buildLinux
 , fetchurl
+, lib
 , ...
-}:
+}@args:
 let
   modDirVersion = "6.1.75";
 in
-(linuxManualConfig rec {
+(buildLinux ( args // {
+
+  # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
+  src = fetchFromGitHub {
+    owner = "armbian";
+    repo = "linux-rockchip";
+    rev = "rk-6.1-rkr5.1";
+    hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
+  };
+
   inherit modDirVersion;
   version = "${modDirVersion}-armbian";
   extraMeta.branch = "6.1";
-
-  # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
-  # src = fetchFromGitHub {
-  #   owner = "armbian";
-  #   repo = "linux-rockchip";
-  #   rev = "rk-6.1-rkr5.1";
-  #   hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
-  # };
-
-  src = fetchurl {
-    url = "mirror://kernel/linux/kernel/v6.x/linux-6.6.87.tar.xz";
-    sha256 = "1iks6msk4cajyy0khyhrwsdl123hr81n67xzdnhlgg6dvb1famw9";
-  };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
   # allows usage of mainline mesa
@@ -44,18 +42,15 @@ in
     extraConfig = { };
   }];
 
-  # Steps to the generated kernel config file
-  #  1. git clone --depth 1 https://github.com/hbiyik/linux.git -b rk-6.1-rkr3-panthor
-  #  2. put https://github.com/hbiyik/linux/blob/rk-6.1-rkr3-panthor/debian.rockchip/config/config.common.ubuntu to arch/arm64/configs/rk35xx_vendor_defconfig
-  #  3. run `nix develop .#fhsEnv` in this project to enter the fhs test environment defined here.
-  #  4. `make rk35xx_vendor_defconfig` in the kernel root directory to configure the kernel.
-  #  5. Then use `make menuconfig` in kernel's root directory to view and customize the kernel(like enable/disable rknpu, rkflash, ACPI(for UEFI) etc).
-  #  6. copy the generated .config to ./pkgs/kernel/rk35xx_vendor_config (also be sure to update the corresponding `.nix` file accordingly) and commit it.
-  # 
+  extraMeta = {
+    platforms = with lib.platforms; aarch64;
+    hydraPlatforms = [ "aarch64-linux" ];
+  };
+
   configfile = ./rk35xx_vendor_config;
-  # allowImportFromDerivation = true;
-  # config = import ./rk35xx_vendor_config.nix;
-}).overrideAttrs (old: {
+  ignoreConfigErrors = true;
+
+})).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
 })
