@@ -25,8 +25,8 @@ in
   src = fetchFromGitHub {
     owner = "Joshua-Riek";
     repo = "linux-rockchip";
-    rev = "5c43412639fd134f0ba690de2108eaa7ea349e2a";
-    hash = "sha256-aKm/RQTRTzLr8+ACdG6QW1LWn+ZOjQtlvU2KkZmYicg=";
+    rev = "e21cf49ee9a41a02846da050a6930e317bc99b68";
+    hash = "sha256-gAI8BuZDG7hq8MmbCnjwLSKwcYxKsGcyerXlKBTbL+U=";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
