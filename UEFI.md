@@ -40,14 +40,15 @@ First, build the raw efi image:
 # 1. Build using the qemu-emulated aarch64 environment or on Orange Pi 5 Plus itself.
 # In this way, we can take advantage of the official build cache on NixOS to greatly speed up the build
 # it takes about 40 minutes to build the image(mainly the kernel) on my Orange Pi 5 Plus.
+# https://nixos.wiki/wiki/NixOS_on_ARM#Compiling_through_binfmt_QEMU
 # for orange pi 5 plus
-nix build github:ryan4yin/nixos-rk3588/2024092600#rawEfiImage-opi5plus --show-trace -L --verbose
+nix build github:gnull/nixos-rk3588#rawEfiImage-opi5plus --show-trace -L --verbose
 
 # for orange pi 5
-nix build github:ryan4yin/nixos-rk3588/2024092600#rawEfiImage-opi5 --show-trace -L --verbose
+nix build github:gnull/nixos-rk3588#rawEfiImage-opi5 --show-trace -L --verbose
 
 # for rock 5a
-nix build github:ryan4yin/nixos-rk3588/2024092600#rawEfiImage-rock5a --show-trace -L --verbose
+nix build github:gnull/nixos-rk3588#rawEfiImage-rock5a --show-trace -L --verbose
 ```
 
 If you encounter issues like [`cannot allocate memory` despite free reporting "available"](https://stackoverflow.com/questions/46464785/cannot-allocate-memory-despite-free-reporting-available) when building the raw efi image, check your `dmesg`, and try to fix it via:
