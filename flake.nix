@@ -189,6 +189,9 @@
         rawEfiImage-opi5plus = self.nixosConfigurations.orangepi5plus-uefi.config.formats.rk3588-raw-efi;
         rawEfiImage-opi5pro = self.nixosConfigurations.orangepi5pro-uefi.config.formats.rk3588-raw-efi;
         rawEfiImage-rock5a = self.nixosConfigurations.rock5a-uefi.config.formats.rk3588-raw-efi;
+
+        # UBoot
+        uboot-test = (pkgs.callPackage pkgs/u-boot-opi5pro {});
       };
 
       devShells.fhsEnv =
