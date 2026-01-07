@@ -4,7 +4,14 @@
 
 A minimal flake to run NixOS on RK3588/RK3588s based SBCs, support both UEFI & U-Boot.
 
-Default user: `rk`, default password: `rk3588`
+Since this flake was started, some boards (Pi 5, Pi 5 Plus) got upstream Nixpkgs support.
+The upstream support does not cover all boards yet,
+  and has some differences with vendor-provided kernel (for example, different NPU interfaces).
+The flake still exists to provide system configs and SD card images based on vendor kernel and U-Boot,
+  since some may prefer them over upstream at the moment.
+
+If you want to make an SD card image for your board using upstream packages (without using this flake),
+  see [this example config](./examples/upstream-opi/) for Pi 5 Plus.
 
 ## Boards
 
@@ -40,6 +47,8 @@ U-Boot support:
 
 ## Flash & Boot NixOS
 
+Default user: `rk`, default password: `rk3588`
+
 The SD card images built using this flake do not embed a bootloader,
   and won't boot directly on a new board
   (unlike Armbian images that do embed U-Boot and just run out of the box).
@@ -65,7 +74,12 @@ See [Debug.md](./Debug.md)
 ## Custom Deployment
 
 You can use this flake as an input to build your own configuration.
-Here is an example configuration that you can use as a starting point: [Demo - Deployment](./demo)
+Here is an example configuration that you can use as a starting point: [Demo - Deployment](./examples/demo).
+
+The demo above uses Colmena with remote deployments.
+If you want something more basic, just create a [regular system config with flakes](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/nixos-with-flakes-enabled)
+  and import `nixos-rk3588.nixosModules.${board}` as well as `nixos-rk3588.nixosModules.${board}.sd-image`
+  modules provided by this flake.
 
 ## How this flake works
 
