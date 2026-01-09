@@ -4,13 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-
-    # This is temporary, until https://github.com/NixOS/nixpkgs/pull/477779 is fixed:
-    gnull.url = "github:gnull/nixpkgs/patch-1";
   };
 
   outputs =
-    { self, nixpkgs, flake-utils, gnull, ... }:
+    { self, nixpkgs, flake-utils, ... }:
     {
       ## System config, use with nixos-rebuild
       nixosConfigurations = {
@@ -23,7 +20,6 @@
           ];
           specialArgs = {
             inherit nixpkgs;
-            inherit gnull;
           };
         };
       };

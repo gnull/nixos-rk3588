@@ -18,22 +18,6 @@
         "type": "github"
       }
     },
-    "gnull": {
-      "locked": {
-        "lastModified": 1767797295,
-        "narHash": "sha256-P+JNIdHQIeUmv+IeX2s1kDQzDTJ7Sr9LFTo1a53wbNI=",
-        "owner": "gnull",
-        "repo": "nixpkgs",
-        "rev": "00850412e84afb131272c7d14d7bdfe0717bbb6e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gnull",
-        "ref": "patch-1",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1767640445,
@@ -53,7 +37,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "gnull": "gnull",
         "nixpkgs": "nixpkgs"
       }
     },

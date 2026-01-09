@@ -12,6 +12,7 @@ The flake still exists to provide system configs and SD card images based on ven
 
 If you want to make an SD card image for your board using upstream packages (without using this flake),
   see [this example config](./examples/upstream-opi/) for Pi 5 Plus.
+If the example config works for you, you don't need this flake.
 
 ## Boards
 
