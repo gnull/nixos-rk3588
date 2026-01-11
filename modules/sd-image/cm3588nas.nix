@@ -6,7 +6,16 @@
   ...
 }: let
   rootPartitionUUID = "14e19a7b-0ae0-484d-9d54-43bd6fdc20c7";
-  uboot = pkgs.ubootCM3588NAS;
+  unfreePkgs = import pkgs.path {
+    config.allowUnfree = true;
+    inherit (pkgs) system;
+  };
+  aarch64Pkgs = unfreePkgs.pkgsCross.aarch64-multiplatform;
+  pkgsCross = rk3588.pkgsKernel;
+  # Either this line
+  uboot = pkgsCross.ubootCM3588NAS;
+  # or this one
+  # uboot = aarch64Pkgs.ubootCM3588NAS;
 in {
   imports = [
     "${rk3588.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
