@@ -30,8 +30,6 @@ in
     hash = "sha256-70wGP16SJHs7I8HklhNdrJbWzfvcgJCupgfOq81e1U8=";
   };
 
-  # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
-  # allows usage of mainline mesa
   kernelPatches = [
   ];
 
@@ -48,4 +46,17 @@ in
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
+
+  # The hacky mali code tries to include a binary blob by a relative path,
+  # which works only when your src dir is the same as build dir. It breaks with
+  # Nix'es reproducible builds where these are cleanly separated. We patch the
+  # path to point be absolute. Not sure if this is a clean solution, but it
+  # seems to work.
+  postPatch =
+    ''
+      sed -i "drivers/gpu/arm/bifrost/csf/mali_kbase_csf_firmware.c" \
+        -e "s:drivers/gpu/arm/bifrost/mali_csffw.bin:$src/drivers/gpu/arm/bifrost/mali_csffw.bin:"
+    ''
+    + "\n"
+    + old.postPatch;
 })
