@@ -14,30 +14,26 @@
 , ...
 }:
 let
-  modDirVersion = "6.1.75";
+  modDirVersion = "6.1.115";
 in
 (linuxManualConfig {
   inherit modDirVersion;
-  version = "${modDirVersion}-jr-noble";
-  extraMeta.branch = "6.1";
+  version = "${modDirVersion}-armbian";
+  extraMeta.branch = "rk-6.1-rkr5.1";
 
   # https://github.com/Joshua-Riek/linux-rockchip/tree/noble
   src = fetchFromGitHub {
-    owner = "Joshua-Riek";
+    owner = "armbian";
     repo = "linux-rockchip";
-    rev = "e21cf49ee9a41a02846da050a6930e317bc99b68";
-    hash = "sha256-gAI8BuZDG7hq8MmbCnjwLSKwcYxKsGcyerXlKBTbL+U=";
+    #rev = "rk-6.1-rkr5.1";
+    rev = "b908c7339f51eddcfe8402cd15d1e1f8f4e67c29";
+    hash = "sha256-70wGP16SJHs7I8HklhNdrJbWzfvcgJCupgfOq81e1U8=";
   };
 
   # https://github.com/hbiyik/linux/tree/rk-6.1-rkr3-panthor
   # allows usage of mainline mesa
-  kernelPatches = [{
-    name = "hbiyik-panthor.patch";
-    # Generate using this command:
-    #   curl -o hbiyik-panthor.patch -L https://github.com/hbiyik/linux/compare/aa54fa4e0712616d44f2c2f312ecc35c0827833d...c81ebd8e12b64a42a6efd68cc0ed018b57d14e91.patch
-    patch = ./hbiyik-panthor.patch;
-    extraConfig = { };
-  }];
+  kernelPatches = [
+  ];
 
   # Steps to the generated kernel config file
   #  1. git clone --depth 1 https://github.com/hbiyik/linux.git -b rk-6.1-rkr3-panthor
