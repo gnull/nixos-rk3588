@@ -1,37 +1,32 @@
-{stdenv, lib, fetchzip, dpkg, ...}:
-  let
-  in stdenv.mkDerivation rec {
-      pname = "linux-u-boot-orangepi5pro-vendor";
-      version = "2017.09";
-      src = ./.;
-
-      nativeBuildInputs = [ ];
-
-      buildInputs = [
-        dpkg
-      ];
-
-      dontConfigure = true;
-      dontBuild = true;
-
-      installPhase = ''
-        runHook preInstall
-
-        # Copy the directory structure directly
-        set -x
-        mkdir -p $out/unpack
-        dpkg -x linux-u-boot-orangepi5pro-vendor_2017.09-Sb04e-P9292-H697e-V14ee-B4d1d-R448a_arm64.deb $out/unpack
-        mv $out/unpack/usr/lib/linux-u-boot-vendor-orangepi5pro/u-boot.itb $out/
-        mv $out/unpack/usr/lib/linux-u-boot-vendor-orangepi5pro/idbloader.img $out/
-        rm -r $out/unpack
-        set +x
-
-        runHook postInstall
-      '';
-  }
-
-  ## See
-  # https://github.com/NixOS/nixpkgs/blob/master/pkgs/misc/uboot/default.nix
-  # https://github.com/armbian/build/blob/545b6e28bb7e00336ab108ffc362f0124e86701c/config/boards/orangepi5pro.csc
-  # https://github.com/armbian/os/pkgs/container/os%2Fuboot-orangepi5pro-vendor
-  # https://github.com/orangepi-xunlong/u-boot-orangepi/commits/v2017.09-rk3588/
+# Mainline U-Boot for Orange Pi 5 Pro (RK3588S).
+#
+# The defconfig is not yet upstream — Armbian carries a patch that adds
+# orangepi-5-pro-rk3588s_defconfig and the board DTS.  We fetch the
+# patch directly from Armbian's build repo.
+#
+# Produces u-boot-rockchip.bin (combined TPL+SPL+ATF+U-Boot, single dd)
+# and u-boot-rockchip-spi.bin (for SPI NOR flash, if ever needed).
+{
+  buildUBoot,
+  armTrustedFirmwareRK3588,
+  rkbin,
+  fetchurl,
+  ...
+}:
+buildUBoot {
+  defconfig = "orangepi-5-pro-rk3588s_defconfig";
+  extraMeta.platforms = ["aarch64-linux"];
+  BL31 = "${armTrustedFirmwareRK3588}/bl31.elf";
+  ROCKCHIP_TPL = rkbin.TPL_RK3588;
+  extraPatches = [
+    (fetchurl {
+      name = "add-orangepi5-pro-support.patch";
+      url = "https://raw.githubusercontent.com/armbian/build/main/patch/u-boot/v2025.07/board_orangepi5pro/0001-add-orangepi5-pro-support.patch";
+      hash = "sha256-cU7V/IloWE/WAl4+V5TRc7rwGriU3XHzW8NDQcRj7SI=";
+    })
+  ];
+  filesToInstall = [
+    "u-boot-rockchip.bin"
+    "u-boot-rockchip-spi.bin"
+  ];
+}
