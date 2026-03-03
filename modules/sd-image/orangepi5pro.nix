@@ -43,10 +43,10 @@ in {
       mkdir -p ./files/boot/firmware
     '';
 
-    # Based on https://salsa.debian.org/debian/u-boot/-/blob/debian/latest/debian/u-boot-rockchip.README.Debian
+    # Mainline u-boot produces a single combined binary (TPL+SPL+ATF+U-Boot).
+    # Write at sector 64 (byte offset 32 KiB) per Rockchip boot ROM spec.
     postBuildCommands = ''
-      dd if=${uboot}/idbloader.img of=$img seek=64 conv=fsync,notrunc
-      dd if=${uboot}/u-boot.itb of=$img seek=16384 conv=fsync,notrunc
+      dd if=${uboot}/u-boot-rockchip.bin of=$img seek=64 conv=notrunc
     '';
   };
 }
