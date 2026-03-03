@@ -11,6 +11,7 @@ in {
   imports = [
     ./base.nix
     ./dtb-install.nix
+    ./orangepi5pro-extras.nix
   ];
 
   boot = {
