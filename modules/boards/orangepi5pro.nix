@@ -1,12 +1,12 @@
 # =========================================================================
-#      Orange Pi 5 Plus Specific Configuration
+#      Orange Pi 5 Pro Specific Configuration
 # =========================================================================
 {
   pkgs,
   rk3588,
   ...
 }: let
-  pkgsKernel = rk3588.pkgsKernel;
+  inherit (rk3588) pkgsKernel;
 in {
   imports = [
     ./base.nix
